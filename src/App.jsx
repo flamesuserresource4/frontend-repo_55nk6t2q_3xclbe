@@ -1,28 +1,46 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import HomeSections from './components/HomeSections'
+import FixturesPage from './components/FixturesPage'
+import PlayersPage from './components/PlayersPage'
+import AboutPage from './components/AboutPage'
+import ContactPage from './components/ContactPage'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
-    </div>
+    <>
+      <Hero />
+      <HomeSections />
+    </>
   )
 }
 
-export default App
+function Footer() {
+  return (
+    <footer className="border-t border-green-100 mt-10">
+      <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-green-800/80 flex flex-col md:flex-row items-center justify-between">
+        <div>© {new Date().getFullYear()} Sankalp Cricket Club</div>
+        <div className="mt-2 md:mt-0">Proudly built for our community</div>
+      </div>
+    </footer>
+  )
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-gradient-to-b from-green-50 to-white text-green-900">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/fixtures" element={<FixturesPage />} />
+          <Route path="/players" element={<PlayersPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  )
+}
